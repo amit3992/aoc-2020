@@ -48,9 +48,4 @@ public class Day1 implements Day {
         return Arrays.stream(readDay(1).split(System.lineSeparator())).mapToInt(Integer::parseInt);
     }
 
-    private int getRequiredFuel(int mass) {
-        System.out.println(mass);
-        return -1;
-    }
-
 }
