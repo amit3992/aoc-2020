@@ -6,6 +6,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 
+/**
+ * Template ref: https://github.com/SimonBaars/adventOfCode-2019/
+ */
 public interface DoesFileOperations {
 
 	public default String getFileAsString(File file) throws IOException {
