@@ -3,7 +3,7 @@
 Days:
 - [Day 1](https://github.com/amit3992/aoc-2020/blob/master/src/main/java/com/amit/aoc/days/Day1.java)
 - [Day 2](https://github.com/amit3992/aoc-2020/blob/master/src/main/java/com/amit/aoc/days/Day2.java)
-- [Day 2](https://github.com/amit3992/aoc-2020/blob/master/src/main/java/com/amit/aoc/days/Day3.java)
+- [Day 3](https://github.com/amit3992/aoc-2020/blob/master/src/main/java/com/amit/aoc/days/Day3.java)
 
 Output
 ```
