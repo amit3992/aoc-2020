@@ -17,7 +17,7 @@ public class Day5 implements Day {
 
     public static void main(String[] args) throws IOException
     {
-        System.out.println("Day3:");
+        System.out.println("Day5:");
         new Day5().printParts();
     }
 
