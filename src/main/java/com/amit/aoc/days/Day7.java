@@ -57,14 +57,19 @@ public class Day7 implements Day {
     @Override
     public Object part2() throws IOException {
 
-        int count = nestedCount(this.bags, "shiny gold") - 1;
+        int count = nestedCount("shiny gold") - 1;
         return count;
     }
 
-    private int nestedCount(Map<String, Map<String, Integer>> rules, String bagColor) {
-        return 1 + rules.getOrDefault(bagColor, new HashMap<>()).entrySet().stream()
-                .mapToInt(e -> e.getValue() * nestedCount(rules, e.getKey()))
-                .sum();
+    private int nestedCount(String bagColor) {
+        Map<String, Integer> map = this.bags.get(bagColor);
+        int count = 1;
+
+        for(String key : map.keySet()) {
+            count += (map.get(key).intValue() * nestedCount(key));
+        }
+
+        return count;
     }
 
     private void parseBagRules(String [] data) {
