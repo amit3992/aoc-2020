@@ -10,6 +10,7 @@ Days:
 - [Day 7](https://github.com/amit3992/aoc-2020/blob/master/src/main/java/com/amit/aoc/days/Day7.java)
 - [Day 8](https://github.com/amit3992/aoc-2020/blob/master/src/main/java/com/amit/aoc/days/Day8.java)
 - [Day 9](https://github.com/amit3992/aoc-2020/blob/master/src/main/java/com/amit/aoc/days/Day9.java)
+- [Day 10](https://github.com/amit3992/aoc-2020/blob/master/src/main/java/com/amit/aoc/days/Day10.java)
 
 Output
 ```
@@ -48,6 +49,10 @@ Part 2: 1205
 Day9:
 Part 1: 776203571
 Part 2: 104800569
+
+Day10:
+Part 1: 2470
+Part 2: 1973822685184
 ```
 
 Code template ref: https://github.com/SimonBaars/adventOfCode-2019/
