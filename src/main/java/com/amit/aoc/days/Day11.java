@@ -89,7 +89,160 @@ public class Day11 implements Day {
 
     @Override
     public Object part2() throws IOException {
-        return Integer.MAX_VALUE;
+
+        Seat [][] initialState = this.map;
+        int rows = initialState.length;
+        int cols = initialState[0].length;
+        boolean changeState = true;
+        LinkedList<Seat[][]> seatStateQ = new LinkedList<>();
+        seatStateQ.add(initialState);
+
+        int iteration = 1;
+
+
+        while(changeState) {
+            System.out.println("Iteration: " + iteration);
+
+            System.out.println("-----------------------------------------");
+//            printSeatMap(initialState);
+
+            Seat[][] newState = solvePart2(initialState);
+            changeState = false;
+
+            for(int i = 0; i < newState.length; i++) {
+
+                if(changeState) {
+                    break;
+                }
+                for(int j = 0; j < newState[i].length; j++)
+                {
+                    String nstate = newState[i][j].getState().getLabel();
+                    String istate = initialState[i][j].getState().getLabel();
+                    if(!nstate.equals(istate))
+                    {
+                        changeState = true;
+                        break;
+                    }
+                }
+            }
+            iteration++;
+            initialState = newState;
+
+            System.out.println("New state");
+            printSeatMap(newState);
+        }
+
+        return countOccupiedSeats(initialState);
+    }
+
+    private Seat[][] solvePart2(Seat[][] seats) {
+        Seat [][] updated = new Seat[seats.length][seats[0].length];
+
+        for(int i = 0; i < updated.length; i++) {
+            for(int j = 0; j < updated[i].length; j++) {
+
+                Seat currentSeat = seats[i][j];
+
+                switch(currentSeat.getState().getLabel()) {
+                    case "L":
+                        boolean occupied = true;
+
+                        for(int di = -1; di < 2; di++) {
+                            if(!occupied) {
+                                break;
+                            }
+
+                            for(int dj = -1; dj < 2; dj++) {
+
+                                if(di == 0 || dj == 0) {
+                                    continue;
+                                }
+
+                                if(!occupied)
+                                    break;
+
+                                for(int scale = 1; scale < 100; scale++)
+                                {
+                                    int iOffScale = di * scale;
+                                    int jOffScale = dj * scale;
+
+                                    if(i + iOffScale < 0 || j + jOffScale < 0 || i + iOffScale >= updated.length || j + jOffScale >= updated[i].length) {
+                                        continue;
+                                    }
+
+                                    Seat seatAtOff = seats[i + iOffScale][j + jOffScale];
+                                    if(seatAtOff.getState().getLabel().equals(SeatState.H.getLabel()))
+                                    {
+                                        occupied = false;
+                                        break;
+                                    }
+                                    else if(seatAtOff.getState().getLabel().equals(SeatState.L.getLabel()))
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if(occupied) {
+                            updated[i][j] = new Seat(i, j);
+                            updated[i][j].setState(SeatState.H);
+                        } else {
+                            updated[i][j] = new Seat(i, j);
+                            updated[i][j].setState(SeatState.L);
+                        }
+
+                        break;
+                    case "H":
+
+                        int occupiedCount = 0;
+
+                        for(int di = -1; di < 2; di++)
+                        {
+                            for(int dj = -1; dj < 2; dj++)
+                            {
+                                if(di == 0 && dj == 0)
+                                    continue;
+                                for(int scale = 1; scale < 100; scale++)
+                                {
+                                    int iOffScale = di * scale;
+                                    int jOffScale = dj * scale;
+                                    if(i + iOffScale < 0 || j + jOffScale < 0 || i + iOffScale >= updated.length || j + jOffScale >= updated[i].length)
+                                        continue;
+
+                                    Seat seatAtOff = seats[i + iOffScale][j + jOffScale];
+                                    if(seatAtOff.getState().getLabel().equals(SeatState.H.getLabel()))
+                                    {
+                                        occupiedCount++;
+                                        break;
+                                    }
+                                    else if(seatAtOff.getState().getLabel().equals(SeatState.L.getLabel()))
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if(occupiedCount >= 5) {
+                            updated[i][j] = new Seat(i, j);
+                            updated[i][j].setState(SeatState.L);
+                        } else {
+                            updated[i][j] = new Seat(i, j);
+                            updated[i][j].setState(SeatState.H);
+                        }
+
+                        break;
+                    case "X":
+                        updated[i][j] = new Seat(i, j);
+                        updated[i][j].setState(SeatState.X);
+                        break;
+                }
+
+            }
+        }
+
+        return updated;
     }
 
     private int occupiedNeighbors(Seat[][] seatMap, Seat p) {

@@ -13,7 +13,6 @@ public class Day4 implements Day {
     private String[] data;
     public Day4() throws IOException {
         this.data =  Arrays.stream(readDay(4).split(System.lineSeparator())).toArray(String[]::new);
-
     }
 
     public static void main(String[] args) throws IOException
