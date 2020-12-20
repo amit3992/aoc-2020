@@ -22,8 +22,6 @@ public class Day12 implements Day {
         int posY = 0;
         int facing = 0;
 
-        char [] equivalentFace =
-
         return Integer.MIN_VALUE;
     }
 
